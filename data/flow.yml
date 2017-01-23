@@ -3,27 +3,30 @@ children:
   - name: settings
     children:
       - name: edge_screen
-    children:
+        children:
       - name: display
         children:
           - name: wallpaper_change
-        children:
+            children:
           - name: adjust_brightness
-    children:
+            children:
       - name: wifi
         children:
-          name: connected_wifi
+          - name: connected_wifi
+            children:
   - name: call
     children:
       - name: call_withnumber
-    children:
+        children:
       - name: message
-    children:
+        children:
       - name: contacts
+        children:
   - name: camera
     children:
       - name: take_photo
         children:
           - name: filters
-      children:
+            children:
       - name: take_video
+        children:
