@@ -20,4 +20,5 @@ children:
       - name: take_photo
         children:
           - name: filters
+
       - name: take_video
