@@ -1,0 +1,46 @@
+.loading
+  position: fixed
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  width: 100%
+  height: 100%
+  z-index: 10000
+  background-color: white
+  font-size: 100%
+  @include mobile 
+    font-size: 115%
+  .loading_label
+    font-weight: bolder
+    margin: 1rem 0
+    color: $blue
+    font-size: 236%
+  svg
+    max-height: 11rem
+    @include mobile
+      max-height: 18rem
+    fill: $blue
+    #pong_ball
+      animation: bounce 3s infinite linear
+      transform: translate(0px,0px) 
+    #pong_right
+      animation: pong_bar_right 4s infinite linear
+      transform: translateY(0px) 
+    #pong_left
+      animation: pong_bar_left 4s infinite linear
+      transform: translateY(0px) 
+  &.done
+    display: none!important
+
+// -1953 <=> 0
+// -720 <=> 720
+// 360
+
+@keyframes bounce
+  0%
+    transform: translateX(0px)
+  50%
+    transform: translateX(-1953px)  
+  100% 
+    transform: translateX(0px) 

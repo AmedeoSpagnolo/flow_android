@@ -1,0 +1,69 @@
+.single_project
+  position: relative
+  width: 100%
+  // background-color: #5cd892
+  .project_cover
+    width: 100%
+    background-size: cover
+    background-position: center center
+    height: 37rem
+  .project_info_top_wrap
+    max-width: 45rem
+    margin-top: 4rem
+    margin-bottom: 2rem
+    .project_title
+      margin: 2rem 0 .2rem 0
+      font-size: 300%
+      text-transform: uppercase
+      font-weight: bold
+      @include mobile
+        margin: 8rem 0 .2rem 0
+    .project_year
+      margin: 2rem 0
+  .project_description
+    margin: 4rem 0 2rem 0
+    font-size: 160%
+    line-height: 140%
+    max-width: 45rem
+    @include mobile
+      font-size: 230%
+  .project_images
+    .project_secondary_image
+      width: 100%  
+      max-width: 45rem  
+      height: auto
+      margin: 2rem 0
+      @include mobile
+        max-width: 100%
+  .link_other_project
+    .thanks_and_prj
+      text-align: center
+      margin-top: 4rem
+      font-size: 160%
+      font-weight: bolder
+    .label
+      background-color: #05386b
+      color: white
+      font-size: 220%
+      font-weight: bolder
+      margin: 2rem 5rem 5rem 5rem
+      padding: 0 1rem
+      @include mobile
+        font-size: 340%
+
+.x_project_mobile_button
+  position: fixed
+  font-weight: bolder
+  left: 0
+  top: 2rem
+  background-color: #05386b
+  color: white
+  margin: .5rem 0
+  z-index: 1000
+  font-size: 220%
+  padding: 0 .8rem
+  cursor: pointer
+  content: '< back'
+  @include mobile
+    padding: 0 1.8rem
+    font-size: 450%

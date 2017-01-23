@@ -1,0 +1,17 @@
+---
+it:
+  menu_about: /chi sono
+  menu_home: /home
+  menu_contact: /contatti
+  menu_works: /lavori
+  menu_sort: '>ordina per skill'
+  menu_play: '>play pong'
+  welcome_sentence: Ciao!<br>Mi chiamo Amedeo Spagnolo.<br>Sono un Interaction Designer continuamente alla ricerca di progetti entusiasmanti!
+  welcome_sentence_1: Guarda i miei
+  welcome_sentence_2: lavori
+  about_bookbinding: Assemblo i miei libri
+  about_sax-pantone: Il colore del mio sassofono è P15-6U
+  about_x-heigth: Sono alto come la lettera X Didot corpo 10.547
+  about_code: Stampo standard-error sulle magliette
+  about_linkedin: Guarda il mio profilo<br>completo su
+  other_project: altri progetti

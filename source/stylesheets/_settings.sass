@@ -1,0 +1,51 @@
+// Colors
+$black             : #58595B
+$white             : #FFFFFF
+$gray              : #F1F2F2
+$gray_alt          : #D1D5D5
+
+$yellow            : #FFD260
+$blue              : #2eb7b8
+$red               : #F35922
+$lblue             : #bfd7ea
+// media queries
+$breakpoint        : 980px
+
+// variable
+$border            : 1rem
+$border_mobile     : 1rem
+
+
+[yellow]
+  color: $yellow
+[blue]
+  color: $blue
+[red]
+  color: $red
+[lblue]
+  color: $lblue
+
+=mobile 
+  @media screen and (max-width: $breakpoint)
+    @content
+
+=hover_menu ($bgcolor)
+  position: relative
+  padding: 0 5px
+  .color
+    content: ''
+    width: 0%
+    height: 100%
+    top: 0
+    left: 0
+    position: absolute
+    background-color: $bgcolor
+    transition: width .5s
+  &:hover
+    .color
+      width: 100%
+
+=text_normal
+  font-size: 170%
+  font-weight: bold
+  letter-spacing: 3px

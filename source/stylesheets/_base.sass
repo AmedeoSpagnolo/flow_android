@@ -1,0 +1,71 @@
+body
+  margin: 0
+  padding: 0
+  position: relative
+  width: 100%
+  height: 100%
+  letter-spacing: 1px
+  font-size: 13px
+  font-family: "effra", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif
+  color: $black
+  @include mobile
+    font-size: 20px
+
+
+*, *:before, *:after 
+  box-sizing: inherit
+
+ul
+  list-style-type: none
+  margin: 0
+  padding: 0
+
+a ,a:visited ,a:hover ,a:active
+  color: inherit
+  text-decoration: none
+  cursor: pointer
+
+svg
+  margin: 0
+  padding: 0
+  width: 100%!important
+  height: 100%!important
+  overflow: visible!important
+
+[mobile-only]
+  display: none!important
+  @include mobile
+    display: flex!important
+
+[desktop-only]
+  display: flex!important
+  @include mobile
+    display: none!important
+
+[hide]
+  display: none!important
+
+[show]
+  display: block!important
+
+[inline]
+  display: inline!important
+
+input[type="text"]:focus,
+textarea[type="text"]:focus
+  outline: none
+
+[wide]
+  width: 100%!important
+
+[relative]
+  position: relative!important
+
+[center]
+  text-align: center!important
+
+[uppercase]
+  text-transform: uppercase!important
+
+[unselectable]
+  user-select: none

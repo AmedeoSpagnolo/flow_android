@@ -1,0 +1,24 @@
+---
+en:
+  menu_about: /cv
+  menu_home: /home
+  menu_contact: /contact
+  menu_works: /project
+  menu_softskills: /soft skills project
+  menu_sort: '>sort by skills'
+  menu_play: '>play pong'
+  welcome_sentence: >
+    Hi there!<br>My name is Amedeo Spagnolo.
+  about_bookbinding: I bind my own books
+  about_sax-pantone: The colour of my saxophone is 110 U
+  about_x-heigth: I am as tall as the letter x Didot 10.547 pt
+  about_code: I print standard-error on my t-shirt
+  about_linkedin: Check out Amedeo Spagnolo<br>full profile on
+  about_sentence: 
+  projects_sentence: The following projects are a selection<br>of my most recent adventures.
+  thanks: thanks for watching
+  other_project: more projects
+  less_project: less projects
+  back_to_project: back to projects
+  soft_skill: >
+    This is a collection of different works done for startups, big clients or just personal experiments sortable by skill.

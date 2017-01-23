@@ -1,0 +1,6 @@
+- name: projects
+  class_name: projects
+  linkto: ''
+- name: about
+  class_name: about
+  linkto: about/

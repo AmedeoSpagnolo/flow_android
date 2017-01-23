@@ -1,0 +1,78 @@
+.menu
+  font-size: 130%
+  font-weight: bold
+  letter-spacing: 3px
+  position: fixed
+  padding: 1rem
+  padding-bottom: .5rem
+  z-index: 2000
+  .wrap
+    .item
+      cursor: pointer
+      padding-left: 1rem
+      opacity: 1
+      &:hover
+        opacity: .8
+    .toggle_pong
+      font-weight: bold
+      display: none
+      &.visible
+        display: flex!important
+      &.toggle_pong_start
+        color: rgba(255, 255, 255, 1.0)
+      &.toggle_pong_stop
+        color: rgba(255, 210, 96, 1.0)
+
+.home
+  .item_projects
+    position: relative
+    &:after
+      content: ''
+      position: absolute
+      bottom: -6px
+      left: 1rem
+      right: 0
+      height: 4px
+      background-color: #05386b
+
+.about
+  .item_about
+    position: relative
+    &:after
+      content: ''
+      position: absolute
+      bottom: -6px
+      left: 1rem
+      right: 0
+      height: 4px
+      background-color: #05386b
+
+.sort_buttons
+  display: none
+  div
+    display: none
+  &.visible
+    div
+      display: flex!important
+
+.home
+  .menu_home
+    .sort_buttons
+      margin: 1.5rem 0 0 0
+      display: flex
+      .creative_field
+        background-color: #5cd892
+        padding: 5px 10px
+        margin-right: 10px
+        margin-bottom: 10px
+        color: white
+        font-size: 80%
+        border-radius: 4px
+        font-weight: normal
+        cursor: pointer
+        border: solid 1px white
+        &:hover
+          background-color: #4dc883
+        &.selected
+          background-color: white
+          color: #5cd892

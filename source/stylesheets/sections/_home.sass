@@ -1,0 +1,63 @@
+.section.home 
+  .content
+    padding: 10rem 1rem
+    display: none
+    z-index: 100
+    @include mobile
+      padding: 11rem 6rem!important
+      font-size: 200%!important
+    &.visible
+      display: block!important
+    .container_work
+      .work_title
+        margin-top: 2rem
+        font-weight: bold
+        font-size: 130%
+        text-transform: uppercase
+        color: white
+        letter-spacing: 3px
+        margin-bottom: .2rem
+        .client_label
+      .work_image_wrapper
+        .work_image
+          max-width: 33.4%
+          margin-bottom: 5rem
+          @include mobile
+            width: 100%
+            max-width: 100%
+      .work_client
+        color: white
+        font-size: 130%
+        font-weight: bold
+        margin-bottom: .6rem
+        text-transform: uppercase
+        letter-spacing: 3px
+        .client_label
+          color: #05386b
+          text-transform: lowercase
+
+
+
+// pong
+.pong_wrap
+  position: fixed
+  top: 100px
+  left: 100px
+  right: 100px
+  max-width: 100%
+  z-index: -100
+  #pong
+    width: 100%
+
+.commands
+  position: fixed
+  bottom: 1rem
+  letter-spacing: 2px
+  color: white
+  left: 50%
+  transform: translateX(-50%)
+  font-weight: bolder
+  display: none
+  text-align: center
+  &.visible
+    display: block!important
