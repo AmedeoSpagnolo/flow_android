@@ -1,0 +1,23 @@
+name: home
+children:
+  - name: settings
+    children:
+      - name: edge_screen
+      - name: display
+        children:
+          - name: wallpaper_change
+          - name: adjust_brightness
+      - name: wifi
+        children:
+          name: connected_wifi
+  - name: call
+    children:
+      - name: call_withnumber
+      - name: message
+      - name: contacts
+  - name: camera
+    children:
+      - name: take_photo
+        children:
+          - name: filters
+      - name: take_video
