@@ -17,4 +17,5 @@
 //= require _app
 //= require _detectIE
 //= require _detectIOS7
+//= require _viz
 //= require _dataviz

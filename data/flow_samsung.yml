@@ -1,0 +1,98 @@
+name: start_lockscreen_1.JPG
+children:
+  - name: start_swipe_2.JPG
+    children:
+      - name: start_home_3.JPG
+        children:
+          - name: dashboard_apps_edge_1.JPG
+            children:
+              - name: dashboard_apps_edge_2.JPG
+                children:
+                  - name: dashboard_notification_center_1.JPG
+                    children:
+              - name: dialer_dialpad_1.JPG
+                children:
+              - name: dialer_create_contact_2.JPG
+                children:
+                  - name: dialer_save_contact_3.JPG
+                    children:
+                      - name: dialer_contacts_4.JPG
+                        children:
+                          - name: dialer_contact_1.JPG
+                            children:
+              - name: dialer_name_2.JPG
+                children:
+                  - name: dialer_message_3.JPG
+                    children:
+                    - name: settings_settings.JPG
+                      children:
+              - name: settings_about_device.JPG
+                children:
+                  - name: settings_accessibility.JPG
+                    children:
+                  - name: settings_accounts.JPG
+                    children:
+                  - name: settings_advanced_features.JPG
+                    children:
+                  - name: settings_application_manager.JPG
+                    children:
+                  - name: settings_applications.JPG
+                    children:
+                  - name: settings_backup_and_reset.JPG
+                    children:
+                  - name: settings_battery.JPG
+                    children:
+                  - name: settings_bluetooth.JPG
+                    children:
+                  - name: settings_data_usage.JPG
+                    children:
+                  - name: settings_date_and_time.JPG
+                    children:
+                  - name: settings_desktop.JPG
+                    children:
+                  - name: settings_display.JPG
+                    children:
+                  - name: settings_do_not_disturb.JPG
+                    children:
+                  - name: settings_edge_screen.JPG
+                    children:
+                  - name: settings_flight_mode.JPG
+                    children:
+                  - name: settings_google_services.JPG
+                    children:
+                  - name: settings_home_screen.JPG
+                    children:
+                  - name: settings_internal_storage.JPG
+                    children:
+                  - name: settings_language_and_input.JPG
+                    children:
+                  - name: settings_lock_screen_and_security.JPG
+                    children:
+                  - name: settings_mobile_hotspot.JPG
+                    children:
+                  - name: settings_more_connection_settings.JPG
+                    children:
+                  - name: settings_my_themes.JPG
+                    children:
+                  - name: settings_nfc_and_payment.JPG
+                    children:
+                  - name: settings_notifications.JPG
+                    children:
+                  - name: settings_privacy_and_safety.JPG
+                    children:
+                  - name: settings_samsung_cloud.JPG
+                    children:
+                  - name: settings_sim_card_manager.JPG
+                    children:
+                  - name: settings_smart_manager.JPG
+                    children:
+                  - name: settings_sounds_and_vibration.JPG
+                    children:
+                  - name: settings_standard_mode.JPG
+                    children:
+                  - name: settings_user_manual.JPG
+                    children:
+                  - name: settings_widgets.JPG
+                    children:
+                  - name: settings_wifi.JPG
+                    children:

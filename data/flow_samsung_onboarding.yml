@@ -1,0 +1,28 @@
+name: welcome_screen_1.JPG
+children:
+- name: welcome_english_2.JPG
+  children:
+  - name: welcome_select_wifi_3.JPG
+    children:
+    - name: welcome_wifipassword_4.JPG
+      children:
+      - name: welcome_terms_and_conditions_5.JPG
+        children:
+        - name: welcome_term_and_conditions_agreement_6.JPG
+          children:
+          - name: welcome_date_time_7.JPG
+            children:
+            - name: welcome_name_8.JPG
+              children:
+              - name: welcome_protect_your_phone_9.JPG
+                children:
+                - name: welcome_google_services_10.JPG
+                  children:
+                  - name: welcome_samsung_account_11.JPG
+                    children:
+                    - name: welcome_copy_content_12.JPG
+                      children:
+                      - name: welcome_easy_mode_13.JPG
+                        children:
+                        - name: welcome_my_knox_14.JPG
+                          children:
