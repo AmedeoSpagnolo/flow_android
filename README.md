@@ -1,21 +1,14 @@
-## to do 
+run:
 
-- pagine scroll left for delay caricamento
-
-- /////
-
-- aggiorna le skills relative all'UX
-- aggiungi le foto che mancano (ricerca, wireframe, user..) 
-- allunga i testi
-
-//////
+  # place raw images in ./script/photo
+  python script/script.py
 
 # MIDDLEMAN 
 
   # start local server
   middleman server
-  
-  # make build 
+
+  # make build
   middleman build
 
 
@@ -24,29 +17,29 @@
 
 ##### - source/layouts/layout.erb
 insert here header informations common to every pages
-  
+
   <title><%= current_page.data.title %></title>
-  
+
   <%= stylesheet_link_tag :site %>
     <%= javascript_include_tag :all %>
-    
+
     <body class="<%= page_classes %>">
       <%= yield %>
     </body>
-    
+
 ##### - source/localizable/index.html.erb
 ##### - source/localizable/secondary_page.html.erb
 insert here the content (only the content) of the single pages
 
   # translate text
   <%= t(:hello) %> World
-  
+
   # load partial
   <%= partial('button', :locals => { :text => "text in Button" }) %>
-  
+
   # in source/_nameofthepartial.erb
   <%= locals[:text] %>
-  
+
 ##### - locales/en.yml
 ##### - locales/it.yml
 insert here the text
@@ -54,14 +47,14 @@ insert here the text
   ---
   en:
     hello: "Hello"
-  
+
   # in config.rb
   activate :i18n, :mount_at_root => :es
 
 ##### - source/_nameofthepartial.erb
 
   <%= locals[:text] %>
-  
+
 ---
 ## data
 
@@ -73,13 +66,13 @@ insert here the text
       <%= "#{k} = #{v}" %>
     <% end %>
   <% end %>
-  
+
 ##### - data/object.yml
   ---
   torch:
     price: 40
     valute: "$"
-  computer: 
+  computer:
     price: 2000
     valute: "euro"
 
@@ -91,7 +84,7 @@ on terminal
   # add the line in source/javascript/main.js
   //= require lodash
 
-  
+
 ---
 T0D0
 ./data/
@@ -100,5 +93,3 @@ T0D0
 ./source/javascripts
 bourbon sass
 neat sass
-
-
