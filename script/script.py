@@ -6,9 +6,9 @@ pwd = str(os.getcwd())
 print pwd
 
 def crop(name):
-    os.system('convert %s/script/photo/%s -crop 2830x1360+300+580 %s/source/images/%s' % (pwd, name, pwd, name))
+    os.system('convert %s/script/photo/%s -crop 1360x2830+300+580 +repage %s/source/images/%s' % (pwd, name, pwd, name))
 
-for file in glob.glob(str(pwd) + "/script/photo/*.jpeg"):
+for file in glob.glob(str(pwd) + "/script/photo/*"):
     # file: /Users/amedeospagnolo/DATA/GIT/TINKLABS/flow_android/script/photo/image.jpeg
     # photo: image.jpeg
     temp = file.split('/')
