@@ -11,7 +11,8 @@ class Viz {
       'depth': 100,
       'label': false,
       'image': false,
-      'placeholder_img': 'true'
+      'placeholder_img': true,
+      'collapse_nodes': true
     }, options)
 
     this.data = data,
@@ -37,7 +38,7 @@ class Viz {
     //
     // collapse all
     //
-    this.collapse_all()
+    // if (!this.collapse_nodes) this.collapse_all()
 
     //
     // update
@@ -57,7 +58,13 @@ class Viz {
       .attr("style", "border: solid 1px gray")
       .attr("id","svg")
     .append("g")
-      .attr("transform", "translate(" + obj.margin.left + "," + obj.margin.top + ")");
+      .attr("transform", "translate(" + obj.margin.left + "," + obj.margin.top + ")")
+
+    this.svg.append("g")
+      .attr("class","links")
+
+    this.svg.append("g")
+      .attr("class","nodes")
   }
 
   collapse (d) {
@@ -89,7 +96,7 @@ class Viz {
     nodes.forEach(function(d) { d.y = d.depth * vm.options.depth })
 
     // Update the nodes…
-    var node = vm.svg.selectAll("g.node")
+    var node = d3.select(".nodes").selectAll("g.node")
         .data(nodes, function(d) { return d.id || (d.id = ++vm.i) })
 
     //
@@ -134,7 +141,7 @@ class Viz {
         .attr('width', '60')
         .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
         .attr('style', 'transform: translate(-110%,-50%)')
-        .attr('opacity', '1')
+        .attr('opacity', .5)
     }
 
 
@@ -154,6 +161,9 @@ class Viz {
     nodeUpdate.select("text")
         .style("fill-opacity", 1);
 
+    // nodeUpdate.select("image")
+    //     .style("opacity", 1);
+
     //
     // nodeExit
     // Transition exiting nodes to the parent's new position.
@@ -169,11 +179,14 @@ class Viz {
     nodeExit.select("text")
         .style("fill-opacity", 1e-6);
 
+    // nodeUpdate.select("image")
+    //     .style("opacity", 0);
+
     //
     // links
     // Update the links…
     //
-    var link = vm.svg.selectAll("path.link")
+    var link = d3.select(".links").selectAll("path.link")
         .data(links, function(d) { return d.target.id; });
 
     // Enter any new links at the parent's previous position.
@@ -209,6 +222,7 @@ class Viz {
   }
 
   click (d) {
+    console.log(d);
     var vm = this
     if (d.children) {
       d._children = d.children;

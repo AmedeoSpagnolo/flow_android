@@ -3,16 +3,17 @@ $( document ).ready(function() {
   var dataset_samsung               = <%= data.flow_samsung.to_json %>
   var dataset_samsung_onboarding    = <%= data.flow_samsung_onboarding.to_json %>
 
-  var dataviz = new Viz(dataset_samsung, {
+  app.dataviz = new Viz(dataset_samsung, {
     'target': ".container",
     'label': false,
     'image': false,
     'depth': 80,
+    'collapse_nodes': true
   })
 
-  dataviz.init()
+  app.dataviz.init()
 
-  // console.log(dataviz.data)
+  console.log(app.dataviz.data)
 
 
   // d3.select(self.frameElement).style("height", "800px");
