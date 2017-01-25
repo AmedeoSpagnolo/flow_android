@@ -1,18 +1,18 @@
-class Viz {
+;class Viz {
 
   constructor(options) {
     this.options = $.extend({
       'dataset': {},
       'target': ".container",
-      'margin': {top: 20, right: 120, bottom: 20, left: 120},
+      'margin': {top: 20, right: 20, bottom: 20, left: 20},
       'width': $(document).width(),
       'height': $(document).height(),
       'duration': 400,
       'overflow': 'auto',
-      'depth': 100,
+      'depth': 240,
       'label': false,
       'image': true,
-      'image_width': 60,
+      'image_width': 180,
       'image_shift': 0,
       'placeholder_img': true,
       'collapse_nodes': false

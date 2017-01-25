@@ -44,5 +44,5 @@ end
 configure :build do
   sprockets.append_path File.join( root, "vendor/assets/bower/" )
   activate :minify_css
-  activate :minify_javascript
+  # activate :minify_javascript
 end
