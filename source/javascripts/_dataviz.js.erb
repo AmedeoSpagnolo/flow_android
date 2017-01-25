@@ -31,7 +31,7 @@ $( document ).ready(function() {
   }
 
   _.forEach(app.visualisations, function(value, key) {
-    var name = value.name.replace("_","<br>")
+    var name = value.name.replace(/_/g,"<br>")
     $(".visualisations").append('<div class="btn" id="' + value.name + '">' + name + '</div>')
     $("#" + value.name).on("click", function(){
       app.draw(app.visualisations[value.name])
