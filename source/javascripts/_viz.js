@@ -131,15 +131,17 @@ class Viz {
       nodeEnter.append('image')
         .attr('xlink:href', function(d) {
           if (vm.placeholder_img) {
-            return '../images/test1.JPG'
+            return '../images/placeholders/phone1.jpg'
           } else {
             return '../images/' + d.name
           }
         })
         .attr('class', 'screenshot')
-        .attr('width', vm.options.image_width + 'px')
-        .attr('style', 'transform: translate(-110%,-50%)')
-        .style("opacity", 0);
+        .attr('width', vm.options.image_width)
+        .attr('overflow', "visible")
+        // .attr('style', 'transform: translate(-110%,-50%)')
+        .attr('transform', 'matrix(2 0 0 2 '+100+' '+100+')')
+        .style("opacity", 1);
 
     }
 
