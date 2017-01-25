@@ -4,11 +4,15 @@ $( document ).ready(function() {
   var dataset_samsung_onboarding    = <%= data.flow_samsung_onboarding.to_json %>
 
   app.dataviz = new Viz(dataset_samsung, {
+    'margin': {top: 20, right: 600, bottom: 20, left: 300},
     'target': ".container",
     'label': false,
     'image': true,
-    'depth': 80,
-    'collapse_nodes': true,
+    'depth': 240,
+    'image_width': 180,
+    'width': 2000,
+    'height': 2000,
+    'collapse_nodes': false,
   })
 
   app.dataviz.init()
