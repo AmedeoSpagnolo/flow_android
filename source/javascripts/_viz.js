@@ -38,11 +38,13 @@ class Viz {
 
   }
 
-  collapse(d) {
+  collapse (d) {
+    var vm = this
     if (d.children) {
       d._children = d.children;
       d._children.forEach(function (el) {
-        this.collapse(el)
+        console.log(el)
+        vm.collapse(el)
       });
       d.children = null;
     }
