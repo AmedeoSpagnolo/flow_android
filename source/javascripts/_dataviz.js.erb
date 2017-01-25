@@ -1,21 +1,30 @@
 $( document ).ready(function() {
 
-  var dataset_samsung               = <%= data.flow_samsung.to_json %>
-  var dataset_samsung_onboarding    = <%= data.flow_samsung_onboarding.to_json %>
+  app.draw = draw
 
-  app.dataviz = new Viz(dataset_samsung, {
+  function draw (obj) {
+    app.dataviz = new Viz(obj)
+    app.dataviz.init()
+  }
+
+  var samsung_onboarding = {
+    'dataset': <%= data.samsung_onboarding.to_json %>,
     'margin': {top: 20, right: 600, bottom: 20, left: 300},
-    'target': ".container",
-    'label': false,
-    'image': true,
     'depth': 240,
     'image_width': 80,
     'width': 2000,
-    'height': 2000,
-    'collapse_nodes': false,
-  })
+    'height': 2000
+  }
 
-  app.dataviz.init()
-  console.log(app.dataviz.data)
+  var samsung_settings = {
+    'dataset': <%= data.samsung_settings.to_json %>,
+    'margin': {top: 20, right: 600, bottom: 20, left: 300},
+    'depth': 240,
+    'image_width': 80,
+    'width': 2000,
+    'height': 2000
+  }
+
+  draw(samsung_settings)
 
 });

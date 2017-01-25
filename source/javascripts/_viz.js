@@ -1,8 +1,9 @@
 class Viz {
 
-  constructor(data, options) {
+  constructor(options) {
     this.options = $.extend({
-      'target': "document",
+      'dataset': {},
+      'target': ".container",
       'margin': {top: 20, right: 120, bottom: 20, left: 120},
       'width': $(document).width(),
       'height': $(document).height(),
@@ -10,14 +11,14 @@ class Viz {
       'overflow': 'auto',
       'depth': 100,
       'label': false,
-      'image': false,
+      'image': true,
       'image_width': 60,
       'image_shift': 0,
       'placeholder_img': true,
-      'collapse_nodes': true
+      'collapse_nodes': false
     }, options)
 
-    this.data = data,
+    this.data = this.options.dataset,
     this.data.x0 = this.options.height / 2
     this.data.y0 = 0
     this.svg = null
@@ -32,7 +33,7 @@ class Viz {
 
   init () {
 
-    //
+
     // create svg tag
     //
     this.create_svg()
