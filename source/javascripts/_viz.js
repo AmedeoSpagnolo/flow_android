@@ -38,7 +38,8 @@ class Viz {
     //
     // collapse all
     //
-    // if (!this.collapse_nodes) this.collapse_all()
+    console.log(this.options.collapse_nodes);
+    if (!this.options.collapse_nodes) this.collapse(this.data)
 
     //
     // update
@@ -135,13 +136,9 @@ class Viz {
             return '../images/' + d.name
           }
         })
-        .attr('xlink:href', function(d) { return '../images/' + d.name })
-        // .attr('xlink:href', function(d) { return '../images/test1.JPG' })
         .attr('class', 'screenshot')
         .attr('width', '60')
-        .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
         .attr('style', 'transform: translate(-110%,-50%)')
-        .attr('opacity', .5)
     }
 
 
@@ -222,7 +219,6 @@ class Viz {
   }
 
   click (d) {
-    console.log(d);
     var vm = this
     if (d.children) {
       d._children = d.children;

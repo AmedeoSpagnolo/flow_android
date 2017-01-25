@@ -6,9 +6,9 @@ $( document ).ready(function() {
   app.dataviz = new Viz(dataset_samsung, {
     'target': ".container",
     'label': false,
-    'image': false,
+    'image': true,
     'depth': 80,
-    'collapse_nodes': true
+    'collapse_nodes': false,
   })
 
   app.dataviz.init()
