@@ -8,7 +8,10 @@ class Viz {
       'height': $(document).height(),
       'duration': 400,
       'overflow': 'auto',
-      'depth': 100
+      'depth': 100,
+      'label': false,
+      'image': false,
+      'placeholder_img': 'true'
     }, options)
 
     this.data = data,
@@ -34,7 +37,7 @@ class Viz {
     //
     // collapse all
     //
-    // this.collapse_all()
+    this.collapse_all()
 
     //
     // update
@@ -75,18 +78,6 @@ class Viz {
     })
   }
 
-  click (d) {
-    var vm = this
-    if (d.children) {
-      d._children = d.children;
-      d.children = null;
-    } else {
-      d.children = d._children;
-      d._children = null;
-    }
-    vm.update(d);
-  }
-
   update (source) {
     var vm = this
 
@@ -106,35 +97,46 @@ class Viz {
     // Enter any new nodes at the parent's previous position.
     //
     var nodeEnter = node.enter().append("g")
-        .attr("class", "node")
-        .style("cursor", "pointer")
-        .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-        .on("click", vm.click);
+      .attr("class", "node")
+      .style("cursor", "pointer")
+      .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+      .on("click", function (el) { vm.click(el) });
 
     nodeEnter.append("circle")
-        .attr("r", 1e-6)
-        .style("fill","#fff")
-        .style("stroke","steelblue")
-        .style("stroke-width","1.5px")
-        .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+      .attr("r", 1e-6)
+      .style("fill","#fff")
+      .style("stroke","steelblue")
+      .style("stroke-width","1.5px")
+      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
 
-      //
-      // node.append('image')
-      //   .attr('xlink:href', function(d) { return '../images/' + d.name })
-      //   // .attr('xlink:href', function(d) { return '../images/test1.JPG' })
-      //   .attr('class', 'screenshot')
-      //   .attr('width', '60')
-      //   .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-      //   .attr('style', 'transform: translate(-110%,-50%)')
-      //   .attr('opacity', '1')
+    if (vm.options.label) {
+      nodeEnter.append("text")
+        .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
+        .attr("dy", ".35em")
+        .style("font","10px")
+        .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+        .text(function(d) { return d.name; })
+        .style("fill-opacity", 1e-6);
+    }
 
-    // nodeEnter.append("text")
-    //     .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
-    //     .attr("dy", ".35em")
-    //     .style("font","10px")
-    //     .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-    //     .text(function(d) { return d.name; })
-    //     .style("fill-opacity", 1e-6);
+    if (vm.options.image) {
+      node.append('image')
+        .attr('xlink:href', function(d) {
+          if (vm.placeholder_img) {
+            return '../images/test1.JPG'
+          } else {
+            return '../images/' + d.name
+          }
+        })
+        .attr('xlink:href', function(d) { return '../images/' + d.name })
+        // .attr('xlink:href', function(d) { return '../images/test1.JPG' })
+        .attr('class', 'screenshot')
+        .attr('width', '60')
+        .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+        .attr('style', 'transform: translate(-110%,-50%)')
+        .attr('opacity', '1')
+    }
+
 
 
     //
@@ -204,6 +206,18 @@ class Viz {
       d.x0 = d.x;
       d.y0 = d.y;
     });
+  }
+
+  click (d) {
+    var vm = this
+    if (d.children) {
+      d._children = d.children;
+      d.children = null;
+    } else {
+      d.children = d._children;
+      d._children = null;
+    }
+    vm.update(d);
   }
 
 }
