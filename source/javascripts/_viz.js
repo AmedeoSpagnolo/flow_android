@@ -38,8 +38,7 @@ class Viz {
     //
     // collapse all
     //
-    console.log(this.options.collapse_nodes);
-    if (!this.options.collapse_nodes) this.collapse(this.data)
+    if (this.options.collapse_nodes) this.collapse(this.data)
 
     //
     // update
@@ -139,6 +138,8 @@ class Viz {
         .attr('class', 'screenshot')
         .attr('width', '60')
         .attr('style', 'transform: translate(-110%,-50%)')
+        .style("opacity", 1e-6);
+
     }
 
 
@@ -158,8 +159,8 @@ class Viz {
     nodeUpdate.select("text")
         .style("fill-opacity", 1);
 
-    // nodeUpdate.select("image")
-    //     .style("opacity", 1);
+    nodeUpdate.select("image")
+        .style("opacity", 1);
 
     //
     // nodeExit
