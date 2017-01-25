@@ -12,6 +12,7 @@ class Viz {
       'label': false,
       'image': false,
       'image_width': 60,
+      'image_shift': 0,
       'placeholder_img': true,
       'collapse_nodes': true
     }, options)
@@ -140,7 +141,7 @@ class Viz {
         .attr('width', vm.options.image_width)
         .attr('overflow', "visible")
         // .attr('style', 'transform: translate(-110%,-50%)')
-        .attr('transform', 'matrix(2 0 0 2 '+100+' '+100+')')
+        .attr('transform', 'matrix(1 0 0 1 ' + vm.options.image_shift + ' '+vm.options.image_shift+')')
         .style("opacity", 1);
 
     }
