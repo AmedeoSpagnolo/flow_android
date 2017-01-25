@@ -41551,9 +41551,10 @@ app.dataviz             = null
 }(window, window.jQuery));
 class Viz {
 
-  constructor(data, options) {
+  constructor(options) {
     this.options = $.extend({
-      'target': "document",
+      'dataset': {},
+      'target': ".container",
       'margin': {top: 20, right: 120, bottom: 20, left: 120},
       'width': $(document).width(),
       'height': $(document).height(),
@@ -41561,13 +41562,14 @@ class Viz {
       'overflow': 'auto',
       'depth': 100,
       'label': false,
-      'image': false,
+      'image': true,
       'image_width': 60,
+      'image_shift': 0,
       'placeholder_img': true,
-      'collapse_nodes': true
+      'collapse_nodes': false
     }, options)
 
-    this.data = data,
+    this.data = this.options.dataset,
     this.data.x0 = this.options.height / 2
     this.data.y0 = 0
     this.svg = null
@@ -41582,7 +41584,7 @@ class Viz {
 
   init () {
 
-    //
+
     // create svg tag
     //
     this.create_svg()
@@ -41691,7 +41693,7 @@ class Viz {
         .attr('width', vm.options.image_width)
         .attr('overflow', "visible")
         // .attr('style', 'transform: translate(-110%,-50%)')
-        .attr('transform', 'matrix(2 0 0 2 '+100+' '+100+')')
+        .attr('transform', 'matrix(1 0 0 1 ' + vm.options.image_shift + ' '+vm.options.image_shift+')')
         .style("opacity", 1);
 
     }
@@ -41789,23 +41791,35 @@ class Viz {
 ;
 $( document ).ready(function() {
 
-  var dataset_samsung               = {"name":"start_lockscreen_1.JPG","children":[{"name":"start_swipe_2.JPG","children":[{"name":"start_home_3.JPG","children":[{"name":"dashboard_apps_edge_1.JPG","children":[{"name":"dashboard_apps_edge_2.JPG","children":[{"name":"dashboard_notification_center_1.JPG","children":null}]},{"name":"dialer_dialpad_1.JPG","children":null},{"name":"dialer_create_contact_2.JPG","children":[{"name":"dialer_save_contact_3.JPG","children":[{"name":"dialer_contacts_4.JPG","children":[{"name":"dialer_contact_1.JPG","children":null}]}]}]},{"name":"dialer_name_2.JPG","children":[{"name":"dialer_message_3.JPG","children":[{"name":"settings_settings.JPG","children":null}]}]},{"name":"settings_about_device.JPG","children":[{"name":"settings_accessibility.JPG","children":null},{"name":"settings_accounts.JPG","children":null},{"name":"settings_advanced_features.JPG","children":null},{"name":"settings_application_manager.JPG","children":null},{"name":"settings_applications.JPG","children":null},{"name":"settings_backup_and_reset.JPG","children":null},{"name":"settings_battery.JPG","children":null},{"name":"settings_bluetooth.JPG","children":null},{"name":"settings_data_usage.JPG","children":null},{"name":"settings_date_and_time.JPG","children":null},{"name":"settings_desktop.JPG","children":null},{"name":"settings_display.JPG","children":null},{"name":"settings_do_not_disturb.JPG","children":null},{"name":"settings_edge_screen.JPG","children":null},{"name":"settings_flight_mode.JPG","children":null},{"name":"settings_google_services.JPG","children":null},{"name":"settings_home_screen.JPG","children":null},{"name":"settings_internal_storage.JPG","children":null},{"name":"settings_language_and_input.JPG","children":null},{"name":"settings_lock_screen_and_security.JPG","children":null},{"name":"settings_mobile_hotspot.JPG","children":null},{"name":"settings_more_connection_settings.JPG","children":null},{"name":"settings_my_themes.JPG","children":null},{"name":"settings_nfc_and_payment.JPG","children":null},{"name":"settings_notifications.JPG","children":null},{"name":"settings_privacy_and_safety.JPG","children":null},{"name":"settings_samsung_cloud.JPG","children":null},{"name":"settings_sim_card_manager.JPG","children":null},{"name":"settings_smart_manager.JPG","children":null},{"name":"settings_sounds_and_vibration.JPG","children":null},{"name":"settings_standard_mode.JPG","children":null},{"name":"settings_user_manual.JPG","children":null},{"name":"settings_widgets.JPG","children":null},{"name":"settings_wifi.JPG","children":null}]}]}]}]}]}
-  var dataset_samsung_onboarding    = {"name":"welcome_screen_1.JPG","children":[{"name":"welcome_english_2.JPG","children":[{"name":"welcome_select_wifi_3.JPG","children":[{"name":"welcome_wifipassword_4.JPG","children":[{"name":"welcome_terms_and_conditions_5.JPG","children":[{"name":"welcome_term_and_conditions_agreement_6.JPG","children":[{"name":"welcome_date_time_7.JPG","children":[{"name":"welcome_name_8.JPG","children":[{"name":"welcome_protect_your_phone_9.JPG","children":[{"name":"welcome_google_services_10.JPG","children":[{"name":"welcome_samsung_account_11.JPG","children":[{"name":"welcome_copy_content_12.JPG","children":[{"name":"welcome_easy_mode_13.JPG","children":[{"name":"welcome_my_knox_14.JPG","children":null}]}]}]}]}]}]}]}]}]}]}]}]}]}
+  app.draw = draw
+  app.visualisations = {}
 
-  app.dataviz = new Viz(dataset_samsung, {
+  function draw (obj) {
+    app.dataviz = new Viz(obj)
+    app.dataviz.init()
+  }
+
+  app.visualisations.samsung_onboarding = {
+    'dataset': {"name":"start_lockscreen_1.JPG","children":[{"name":"start_swipe_2.JPG","children":[{"name":"start_home_3.JPG","children":[{"name":"dashboard_apps_edge_1.JPG","children":[{"name":"dashboard_apps_edge_2.JPG","children":[{"name":"dashboard_notification_center_1.JPG","children":null}]},{"name":"dialer_dialpad_1.JPG","children":null},{"name":"dialer_create_contact_2.JPG","children":[{"name":"dialer_save_contact_3.JPG","children":[{"name":"dialer_contacts_4.JPG","children":[{"name":"dialer_contact_1.JPG","children":null}]}]}]},{"name":"dialer_name_2.JPG","children":[{"name":"dialer_message_3.JPG","children":[{"name":"settings_settings.JPG","children":null}]}]},{"name":"settings_about_device.JPG","children":[{"name":"settings_accessibility.JPG","children":null},{"name":"settings_accounts.JPG","children":null},{"name":"settings_advanced_features.JPG","children":null},{"name":"settings_application_manager.JPG","children":null},{"name":"settings_applications.JPG","children":null},{"name":"settings_backup_and_reset.JPG","children":null},{"name":"settings_battery.JPG","children":null},{"name":"settings_bluetooth.JPG","children":null},{"name":"settings_data_usage.JPG","children":null},{"name":"settings_date_and_time.JPG","children":null},{"name":"settings_desktop.JPG","children":null},{"name":"settings_display.JPG","children":null},{"name":"settings_do_not_disturb.JPG","children":null},{"name":"settings_edge_screen.JPG","children":null},{"name":"settings_flight_mode.JPG","children":null},{"name":"settings_google_services.JPG","children":null},{"name":"settings_home_screen.JPG","children":null},{"name":"settings_internal_storage.JPG","children":null},{"name":"settings_language_and_input.JPG","children":null},{"name":"settings_lock_screen_and_security.JPG","children":null},{"name":"settings_mobile_hotspot.JPG","children":null},{"name":"settings_more_connection_settings.JPG","children":null},{"name":"settings_my_themes.JPG","children":null},{"name":"settings_nfc_and_payment.JPG","children":null},{"name":"settings_notifications.JPG","children":null},{"name":"settings_privacy_and_safety.JPG","children":null},{"name":"settings_samsung_cloud.JPG","children":null},{"name":"settings_sim_card_manager.JPG","children":null},{"name":"settings_smart_manager.JPG","children":null},{"name":"settings_sounds_and_vibration.JPG","children":null},{"name":"settings_standard_mode.JPG","children":null},{"name":"settings_user_manual.JPG","children":null},{"name":"settings_widgets.JPG","children":null},{"name":"settings_wifi.JPG","children":null}]}]}]}]}]},
     'margin': {top: 20, right: 600, bottom: 20, left: 300},
-    'target': ".container",
+    'depth': 140,
+    'image_width': 80,
+    'width': 2000,
+    'height': 1000,
     'label': false,
-    'image': true,
-    'depth': 240,
+  }
+
+  app.visualisations.samsung_settings = {
+    'dataset': {"name":"welcome_screen_1.JPG","children":[{"name":"welcome_english_2.JPG","children":[{"name":"welcome_select_wifi_3.JPG","children":[{"name":"welcome_wifipassword_4.JPG","children":[{"name":"welcome_terms_and_conditions_5.JPG","children":[{"name":"welcome_term_and_conditions_agreement_6.JPG","children":[{"name":"welcome_date_time_7.JPG","children":[{"name":"welcome_name_8.JPG","children":[{"name":"welcome_protect_your_phone_9.JPG","children":[{"name":"welcome_google_services_10.JPG","children":[{"name":"welcome_samsung_account_11.JPG","children":[{"name":"welcome_copy_content_12.JPG","children":[{"name":"welcome_easy_mode_13.JPG","children":[{"name":"welcome_my_knox_14.JPG","children":null}]}]}]}]}]}]}]}]}]}]}]}]}]},
+    'margin': {top: 20, right: 600, bottom: 20, left: 300},
+    'depth': 140,
     'image_width': 80,
     'width': 2000,
     'height': 2000,
-    'collapse_nodes': false,
-  })
+    'label': false,
+  }
 
-  app.dataviz.init()
-  console.log(app.dataviz.data)
+  app.draw(app.visualisations.samsung_settings)
 
 });
 //

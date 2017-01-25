@@ -1,30 +1,43 @@
 $( document ).ready(function() {
 
   app.draw = draw
+  app.visualisations = {}
 
   function draw (obj) {
     app.dataviz = new Viz(obj)
     app.dataviz.init()
   }
 
-  var samsung_onboarding = {
+  app.visualisations.samsung_onboarding = {
+    'name': 'samsung_onboarding',
     'dataset': <%= data.samsung_onboarding.to_json %>,
     'margin': {top: 20, right: 600, bottom: 20, left: 300},
-    'depth': 240,
+    'depth': 140,
     'image_width': 80,
     'width': 2000,
-    'height': 2000
+    'height': 1000,
+    'label': false,
   }
 
-  var samsung_settings = {
+  app.visualisations.samsung_settings = {
+    'name': 'samsung_settings',
     'dataset': <%= data.samsung_settings.to_json %>,
     'margin': {top: 20, right: 600, bottom: 20, left: 300},
-    'depth': 240,
+    'depth': 140,
     'image_width': 80,
     'width': 2000,
-    'height': 2000
+    'height': 2000,
+    'label': false,
   }
 
-  draw(samsung_settings)
+  _.forEach(app.visualisations, function(value, key) {
+    var name = value.name.replace("_","<br>")
+    $(".visualisations").append('<div class="btn" id="' + value.name + '">' + name + '</div>')
+    $("#" + value.name).on("click", function(){
+      app.draw(app.visualisations[value.name])
+    })
+  })
+
+  app.draw(app.visualisations.samsung_settings)
 
 });
