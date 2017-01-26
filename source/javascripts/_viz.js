@@ -95,7 +95,7 @@
           })
         }
       }
-      _max(source)
+      _max(vm.options.data)
       return _.max(mh)
     }
 
@@ -125,7 +125,7 @@
     this.svg = d3.select("#svg")
       .attr("width", resize_width())
       .attr("height", vm.options.height + vm.options.image_height*2)
-      .attr("style", "border: solid 1px gray")
+      // .attr("style", "border: solid 1px gray")
 
     // Normalize for fixed-depth.
     nodes.forEach(function(d) { d.y = d.depth * vm.options.depth })

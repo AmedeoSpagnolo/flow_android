@@ -41509,6 +41509,7 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 	}
 }());
 var app = {}
+var utils = {}
 
 // old browsers
 app.isIE                = true
@@ -41518,6 +41519,25 @@ app.isIOS7              = true
 app.mq                  = null
 
 app.dataviz             = null
+
+
+utils.depthOf = function(object) {
+    var level = 1;
+    var key;
+    for(key in object) {
+        if (!object.hasOwnProperty(key)) continue;
+
+        if(typeof object[key] == 'object'){
+            var depth = utils.depthOf(object[key]) + 1;
+            level = Math.max(depth, level);
+        }
+    }
+    return level;
+}
+
+utils.len = function (object) {
+  Object.keys(object).length
+}
 ;
 ;(function (window, $) {
   function detectIE() {
@@ -41559,14 +41579,16 @@ app.dataviz             = null
       'width': $(document).width(),
       'height': $(document).height(),
       'duration': 400,
+      'floors': 1,
       'overflow': 'auto',
       'depth': 240,
       'label': false,
       'image': true,
       'image_width': 180,
+      'image_height': 180 * 1.1,
       'image_shift': 0,
       'placeholder_img': true,
-      'collapse_nodes': false
+      'collapse_nodes': false,
     }, options)
 
     this.data = this.options.dataset,
@@ -41575,50 +41597,26 @@ app.dataviz             = null
     this.svg = null
     this.i = 0
 
+    this.options.height = this.options.floors * this.options.image_height
+
+    // tree init
     this.tree = d3.layout.tree()
-    .size([this.options.height, this.options.width]);
+        .size([this.options.height, this.options.width]);
 
     this.diagonal = d3.svg.diagonal()
-    .projection(function(d) { return [d.y, d.x]; });
+        .projection(function(d) { return [d.y, d.x]; });
+
   }
 
   init () {
 
-
-    // create svg tag
-    //
-    this.create_svg()
-
-    //
     // collapse all
-    //
     if (this.options.collapse_nodes) this.collapse(this.data)
 
-    //
     // update
-    //
     this.update(this.data)
 
-  }
-
-  create_svg () {
-    var obj = this.options
-    this.svg = d3.select(obj.target)
-      .style("overflow", obj.overflow)
-      .style("width", $(document).width())
-    .append("svg")
-      .attr("width", obj.width)
-      .attr("height", obj.height)
-      .attr("style", "border: solid 1px gray")
-      .attr("id","svg")
-    .append("g")
-      .attr("transform", "translate(" + obj.margin.left + "," + obj.margin.top + ")")
-
-    this.svg.append("g")
-      .attr("class","links")
-
-    this.svg.append("g")
-      .attr("class","nodes")
+    console.log(this.data);
   }
 
   collapse (d) {
@@ -41642,9 +41640,63 @@ app.dataviz             = null
   update (source) {
     var vm = this
 
+    function max_depth () {
+      var md = 0
+      function _max (obj) {
+        if (obj.depth > md) md = obj.depth
+        if (obj.children) {
+          obj.children.forEach(function (el){
+            _max(el)
+          })
+        }
+      }
+      _max(source)
+      return md
+    }
+
+    function max_height (s) {
+      var mh = []
+      function _max (obj) {
+        if (obj.children){
+          var tmp = Object.keys(obj.children).length
+          if (!mh[obj.depth]) mh[obj.depth] = 0
+          mh[obj.depth] += tmp
+          obj.children.forEach(function (el){
+            _max(el)
+          })
+        }
+      }
+      _max(vm.options.data)
+      return _.max(mh)
+    }
+
+    function resize_width (s) {
+      var t = (max_depth(s) + 2) * vm.options.depth + vm.options.margin.left + vm.options.margin.right
+      return t
+    }
+
+    // function resize_height (s) {
+    //   var t = (max_height(s) + 1) * vm.options.image_height + 50 + vm.options.margin.top + vm.options.margin.bottom
+    //   return 1000
+    // }
+    // console.log(max_height(source))
+
     // Compute the new tree layout.
     var nodes = vm.tree.nodes(vm.data).reverse()
     var links = vm.tree.links(nodes)
+
+    // update svg
+    d3.select(vm.options.target)
+      .style("overflow", vm.options.overflow)
+      .style("width", $(document).width())
+
+    d3.select(".wrap")
+      .attr("transform", "translate(" + vm.options.margin.left + "," + vm.options.margin.top + ")")
+
+    this.svg = d3.select("#svg")
+      .attr("width", resize_width())
+      .attr("height", vm.options.height + vm.options.image_height*2)
+      // .attr("style", "border: solid 1px gray")
 
     // Normalize for fixed-depth.
     nodes.forEach(function(d) { d.y = d.depth * vm.options.depth })
@@ -41684,9 +41736,9 @@ app.dataviz             = null
       nodeEnter.append('image')
         .attr('xlink:href', function(d) {
           if (vm.placeholder_img) {
-            return '../images/placeholders/phone1.jpg'
+            return '../images/placeholders/' + vm.options.name + '/phone1.jpg'
           } else {
-            return '../images/' + d.name
+            return '../images/' + vm.options.name + '/' + d.name
           }
         })
         .attr('class', 'screenshot')
@@ -41802,29 +41854,72 @@ $( document ).ready(function() {
   app.visualisations.samsung = {
     'name': 'samsung',
     'dataset': {"name":"start_lockscreen_1.JPG","children":[{"name":"start_swipe_2.JPG","children":[{"name":"start_home_3.JPG","children":[{"name":"dashboard_apps_edge_1.JPG","children":[{"name":"dashboard_apps_edge_2.JPG","children":[{"name":"dashboard_notification_center_1.JPG","children":null}]},{"name":"dialer_dialpad_1.JPG","children":null},{"name":"dialer_create_contact_2.JPG","children":[{"name":"dialer_save_contact_3.JPG","children":[{"name":"dialer_contacts_4.JPG","children":[{"name":"dialer_contact_1.JPG","children":null}]}]}]},{"name":"dialer_name_2.JPG","children":[{"name":"dialer_message_3.JPG","children":[{"name":"settings_settings.JPG","children":null}]}]},{"name":"settings_about_device.JPG","children":null}]}]}]}]},
-    'width': 2000,
-    'height': 2500,
-    'label': false,
+    'floors': 11,
   }
 
   app.visualisations.samsung_onboarding = {
     'name': 'samsung_onboarding',
     'dataset': {"name":"start_lockscreen_1.JPG","children":[{"name":"start_swipe_2.JPG","children":[{"name":"start_home_3.JPG","children":[{"name":"dashboard_apps_edge_1.JPG","children":[{"name":"dashboard_apps_edge_2.JPG","children":[{"name":"dashboard_notification_center_1.JPG","children":null}]},{"name":"dialer_dialpad_1.JPG","children":null},{"name":"dialer_create_contact_2.JPG","children":[{"name":"dialer_save_contact_3.JPG","children":[{"name":"dialer_contacts_4.JPG","children":[{"name":"dialer_contact_1.JPG","children":null}]}]}]},{"name":"dialer_name_2.JPG","children":[{"name":"dialer_message_3.JPG","children":[{"name":"settings_settings.JPG","children":null}]}]},{"name":"settings_about_device.JPG","children":[{"name":"settings_accessibility.JPG","children":null},{"name":"settings_accounts.JPG","children":null},{"name":"settings_advanced_features.JPG","children":null},{"name":"settings_application_manager.JPG","children":null},{"name":"settings_applications.JPG","children":null},{"name":"settings_backup_and_reset.JPG","children":null},{"name":"settings_battery.JPG","children":null},{"name":"settings_bluetooth.JPG","children":null},{"name":"settings_data_usage.JPG","children":null},{"name":"settings_date_and_time.JPG","children":null},{"name":"settings_desktop.JPG","children":null},{"name":"settings_display.JPG","children":null},{"name":"settings_do_not_disturb.JPG","children":null},{"name":"settings_edge_screen.JPG","children":null},{"name":"settings_flight_mode.JPG","children":null},{"name":"settings_google_services.JPG","children":null},{"name":"settings_home_screen.JPG","children":null},{"name":"settings_internal_storage.JPG","children":null},{"name":"settings_language_and_input.JPG","children":null},{"name":"settings_lock_screen_and_security.JPG","children":null},{"name":"settings_mobile_hotspot.JPG","children":null},{"name":"settings_more_connection_settings.JPG","children":null},{"name":"settings_my_themes.JPG","children":null},{"name":"settings_nfc_and_payment.JPG","children":null},{"name":"settings_notifications.JPG","children":null},{"name":"settings_privacy_and_safety.JPG","children":null},{"name":"settings_samsung_cloud.JPG","children":null},{"name":"settings_sim_card_manager.JPG","children":null},{"name":"settings_smart_manager.JPG","children":null},{"name":"settings_sounds_and_vibration.JPG","children":null},{"name":"settings_standard_mode.JPG","children":null},{"name":"settings_user_manual.JPG","children":null},{"name":"settings_widgets.JPG","children":null},{"name":"settings_wifi.JPG","children":null}]}]}]}]}]},
-    'width': 2000,
-    'height': 1200,
-    'label': false,
+    'floors': 70,
   }
 
   app.visualisations.samsung_settings = {
     'name': 'samsung_settings',
     'dataset': {"name":"welcome_screen_1.JPG","children":[{"name":"welcome_english_2.JPG","children":[{"name":"welcome_select_wifi_3.JPG","children":[{"name":"welcome_wifipassword_4.JPG","children":[{"name":"welcome_terms_and_conditions_5.JPG","children":[{"name":"welcome_term_and_conditions_agreement_6.JPG","children":[{"name":"welcome_date_time_7.JPG","children":[{"name":"welcome_name_8.JPG","children":[{"name":"welcome_protect_your_phone_9.JPG","children":[{"name":"welcome_google_services_10.JPG","children":[{"name":"welcome_samsung_account_11.JPG","children":[{"name":"welcome_copy_content_12.JPG","children":[{"name":"welcome_easy_mode_13.JPG","children":[{"name":"welcome_my_knox_14.JPG","children":null}]}]}]}]}]}]}]}]}]}]}]}]}]},
-    'margin': {top: 20, right: 600, bottom: 20, left: 300},
-    'depth': 140,
-    'image_width': 80,
-    'width': 2000,
-    'height': 2000,
-    'label': false,
+    'floors': 2,
   }
+
+  app.visualisations.Asus_Zenfone_3_Deluxe_screen0 = {
+    'name': 'Asus_Zenfone_3_Deluxe_screen0',
+    'dataset': {"name":"onboarding_welcomescreen_1.JPG","children":[{"name":"onboarding_input_2.JPG","children":[{"name":"onboarding_internet_3.JPG","children":[{"name":"onboarding_wifi_4.JPG","children":[{"name":"onboarding_terms_and_conditions_5.JPG","children":[{"name":"onboarding_date_6.JPG","children":[{"name":"onboarding_name_7.JPG","children":[{"name":"onboarding_google_services_8.JPG","children":[{"name":"onboarding_protect_9.JPG","children":[{"name":"onboarding_fingerprint_10.JPG","children":[{"name":"onboarding_screenlock_11.JPG","children":[{"name":"onboarding_scanner_12.JPG","children":[{"name":"onboarding_placefinger_13.JPG","children":[{"name":"onboarding_asus_14.JPG","children":[{"name":"onboarding_account_15.JPG","children":[{"name":"onboarding_promotion_16.JPG","children":[{"name":"onboarding_complete_17.JPG","children":null}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]},
+    'floors': 2,
+  }
+  app.visualisations.Asus_Zenfone_3_Deluxe_screen1 = {
+    'name': 'Asus_Zenfone_3_Deluxe_screen1',
+    'dataset': {"name":"start_homescreen.JPG","children":[{"name":"dashboard_home.JPG","children":[{"name":"dashboard_notification.JPG","children":null},{"name":"dashboard_widgets.JPG","children":null}]},{"name":"dialer_call_1.JPG","children":[{"name":"dialer_call_2.JPG","children":[{"name":"dialer_call_3.JPG","children":[{"name":"dialer_call_4.JPG","children":null}]}]}]},{"name":"dialer_message_1.JPG","children":[{"name":"dialer_message_2.JPG","children":[{"name":"dialer_message_3.JPG","children":null}]}]},{"name":"settings_application_1.JPG","children":[{"name":"settings_settings_2.JPG","children":[{"name":"settings_language_3.JPG","children":[{"name":"settings_language_4.JPG","children":null}]},{"name":"settings_sim_3.JPG","children":null},{"name":"settings_wifi_3.JPG","children":null}]}]}]},
+    'floors': 20,
+  }
+  app.visualisations.HTC_10_screen0 = {
+    'name': 'HTC_10_screen0',
+    'dataset': {"name":"welcome_welcome_1.JPG","children":[{"name":"welcome_terms_of_use_2.JPG","children":[{"name":"welcome_internet_3.JPG","children":[{"name":"welcome_google_services_4.JPG","children":[{"name":"welcome_date_5.JPG","children":[{"name":"welcome_protect_6.JPG","children":[{"name":"welcome_personalize_7.JPG","children":null}]}]}]}]}]}]},
+    'floors': 2,
+  }
+  app.visualisations.HTC_10_screen1 = {
+    'name': 'HTC_10_screen1',
+    'dataset': {"name":"start_home.JPG","children":[{"name":"dashboard_apps_1.JPG","children":[{"name":"dashboard_blinkfeed_1.JPG","children":null},{"name":"dashboard_control_1.JPG","children":null},{"name":"dashboard_search_1.JPG","children":null}]},{"name":"dialer_call_1.JPG","children":[{"name":"dialer_call_2.JPG","children":[{"name":"dialer_call_3.JPG","children":[{"name":"dialer_call_4.JPG","children":null}]}]}]},{"name":"dialer_message_1.JPG","children":[{"name":"dialer_message_2.JPG","children":null}]},{"name":"settings_settings_1.JPG","children":[{"name":"settings_wifi_2.JPG","children":null},{"name":"settings_language_2.JPG","children":[{"name":"settings_language_3.JPG","children":null}]}]}]},
+    'floors': 20,
+  }
+  app.visualisations.Huawei_Mate_9_screen0 = {
+    'name': 'Huawei_Mate_9_screen0',
+    'dataset': {"name":"welcome_logo_1.JPG","children":[{"name":"welcome_language_2.JPG","children":[{"name":"welcome_sim_3.JPG","children":[{"name":"welcome_terms_and_conditions_4.JPG","children":[{"name":"welcome_weather_5.JPG","children":[{"name":"welcome_wifi_6.JPG","children":[{"name":"welcome_internet_7.JPG","children":[{"name":"welcome_google_8.JPG","children":[{"name":"welcome_data_9.JPG","children":[{"name":"welcome_touch_10.JPG","children":[{"name":"welcome_welcome_11.JPG","children":null}]}]}]}]}]}]}]}]}]}]},
+    'floors': 2,
+  }
+  app.visualisations.Huawei_Mate_9_screen1 = {
+    'name': 'Huawei_Mate_9_screen1',
+    'dataset': {"name":"start_lockscreen_1.JPG","children":[{"name":"start_home_2.JPG","children":[{"name":"dashboard_notification_1.JPG","children":null},{"name":"dashboard_weather_1.JPG","children":null},{"name":"dialer_call_1.JPG","children":[{"name":"dialer_call_2.JPG","children":[{"name":"dialer_call_3.JPG","children":[{"name":"dialer_call_4.JPG","children":null}]}]}]},{"name":"dialer_message_1.JPG","children":[{"name":"dialer_message_2.JPG","children":[{"name":"dialer_message_3.JPG","children":null}]}]},{"name":"settings_settings_1.JPG","children":[{"name":"settings_display_2.JPG","children":null},{"name":"settings_data_2.JPG","children":null},{"name":"settings_wifi_2.JPG","children":[{"name":"settings_wifi_3.JPG","children":null}]}]}]}]},
+    'floors': 20,
+  }
+  app.visualisations.LG_V20_screen0 = {
+    'name': 'LG_V20_screen0',
+    'dataset': {"name":"welcome_welcome_1.JPG","children":[{"name":"welcome_sim_2.JPG","children":[{"name":"welcome_internet_3.JPG","children":[{"name":"welcome_google_4.JPG","children":[{"name":"welcome_date_5.JPG","children":[{"name":"welcome_name_6.JPG","children":[{"name":"welcome_screenlock_7.JPG","children":[{"name":"welcome_fingerprint_8.JPG","children":[{"name":"welcome_fingerprint_9.JPG","children":[{"name":"welcome_legal_10.JPG","children":null}]}]}]}]}]}]}]}]}]},
+    'floors': 2,
+  }
+  app.visualisations.LG_V20_screen1 = {
+    'name': 'LG_V20_screen1',
+    'dataset': {"name":"start_home.JPG","children":[{"name":"dashboard_tutorial_1.JPG","children":[{"name":"dashboard_tutorial_2.JPG","children":[{"name":"dashboard_tutorial_3.JPG","children":[{"name":"dashboard_tutorial_4.JPG","children":[{"name":"dashboard_tutorial_5.JPG","children":[{"name":"dashboard_notification_6.JPG","children":null}]}]}]}]}]},{"name":"dialer_call_1.JPG","children":[{"name":"dialer_call_2.JPG","children":[{"name":"dialer_call_3.JPG","children":[{"name":"dialer_call_4.JPG","children":null}]}]}]},{"name":"dialer_message_1.JPG","children":[{"name":"dialer_message_2.JPG","children":null}]},{"name":"settings_settings_1.JPG","children":[{"name":"settings_wifi_2.JPG","children":null}]},{"name":"settings_general_1.JPG","children":[{"name":"settings_language_3.JPG","children":[{"name":"settings_language_4.JPG","children":[{"name":"settings_language_5.JPG","children":null}]}]}]}]},
+    'floors': 20,
+  }
+  app.visualisations.Sony_Xperia_XZ_screen0 = {
+    'name': 'Sony_Xperia_XZ_screen0',
+    'dataset': {"name":"welcome_logo_1.JPG","children":[{"name":"welcome_logo_2.JPG","children":[{"name":"welcome_welcome_3.JPG","children":[{"name":"welcome_information_4.JPG","children":[{"name":"welcome_wifi_5.JPG","children":[{"name":"welcome_name_6.JPG","children":[{"name":"welcome_phone_7.JPG","children":[{"name":"welcome_services_8.JPG","children":[{"name":"welcome_xperia_9.JPG","children":[{"name":"welcome_finish_10.JPG","children":null}]}]}]}]}]}]}]}]}]},
+    'floors': 2,
+  }
+  app.visualisations.Sony_Xperia_XZ_screen1 = {
+    'name': 'Sony_Xperia_XZ_screen1',
+    'dataset': {"name":"start_lockscreen_1.JPG","children":[{"name":"start_home_2.JPG","children":[{"name":"dashbaord_notification_1.JPG","children":[{"name":"dashboard_notification_2.JPG","children":null}]},{"name":"dashboard_search_1.JPG","children":null},{"name":"dialer_call_1.JPG","children":[{"name":"dialer_call_2.JPG","children":[{"name":"dialer_call_3.JPG","children":[{"name":"dialer_call_4.JPG","children":[{"name":"dialer_call_5.JPG","children":null}]}]}]}]},{"name":"dialer_message_1.JPG","children":[{"name":"dialer_message_2.JPG","children":null}]},{"name":"settings_settings_1.JPG","children":[{"name":"settings_wifi_2.JPG","children":null},{"name":"settings_language_2.JPG","children":[{"name":"settings_language_3.JPG","children":null}]}]}]}]},
+    'floors': 18,
+  }
+
 
   _.forEach(app.visualisations, function(value, key) {
     var name = value.name.replace(/_/g,"<br>")

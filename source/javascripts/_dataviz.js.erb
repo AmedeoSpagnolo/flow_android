@@ -26,11 +26,6 @@ $( document ).ready(function() {
     'floors': 2,
   }
 
-  app.visualisations.samsung_edge_screen = {
-    'name': 'samsung_edge_screen1',
-    'dataset': <%= data.samsung_edge_screen.to_json %>,
-    'floors': 20,
-  }
   app.visualisations.Asus_Zenfone_3_Deluxe_screen0 = {
     'name': 'Asus_Zenfone_3_Deluxe_screen0',
     'dataset': <%= data.Asus_Zenfone_3_Deluxe_screen0.to_json %>,
@@ -39,7 +34,7 @@ $( document ).ready(function() {
   app.visualisations.Asus_Zenfone_3_Deluxe_screen1 = {
     'name': 'Asus_Zenfone_3_Deluxe_screen1',
     'dataset': <%= data.Asus_Zenfone_3_Deluxe_screen1.to_json %>,
-    'floors': 15,
+    'floors': 20,
   }
   app.visualisations.HTC_10_screen0 = {
     'name': 'HTC_10_screen0',
@@ -91,6 +86,6 @@ $( document ).ready(function() {
     })
   })
 
-  app.draw(app.visualisations.Sony_Xperia_XZ_screen1)
+  app.draw(app.visualisations.samsung)
 
 });
