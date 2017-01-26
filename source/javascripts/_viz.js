@@ -66,31 +66,20 @@
     function max_depth () {
       var md = 0
       function _max (obj) {
-      console.log(obj.depth);
-      if (obj.depth > md) md = obj.depth
-      if (obj.children) {
-        obj.children.forEach(function (el){
-          _max(el)
-        })
-      }
-      //   if (ob.children) {
-      //     if (ob.children > md) {
-      //       // console.log(md, ob.children)
-      //       md = ob.children
-      //       iterate_md(ob.depth)
-      //     }
-      //     ob.children.forEach(function (el){
-      //       max_depth(el)
-      //     })
-      //   }
+        if (obj.depth > md) md = obj.depth
+        if (obj.children) {
+          obj.children.forEach(function (el){
+            _max(el)
+          })
+        }
       }
       _max(source)
       return md
     }
 
     function resize_width () {
-      // console.log(max_depth());
-      return max_depth() * vm.options.depth + vm.options.margin.left + vm.options.margin.right
+      console.log(max_depth() + 1);
+      return (max_depth() + 2) * vm.options.depth + vm.options.margin.left + vm.options.margin.right
     }
 
     function resize_height () {
@@ -109,7 +98,7 @@
     this.svg = d3.select("#svg")
       .attr("width", resize_width())
       .attr("height", resize_height())
-      .attr("style", "border: solid 1px gray")
+      // .attr("style", "border: solid 1px gray")
 
     // Normalize for fixed-depth.
     nodes.forEach(function(d) { d.y = d.depth * vm.options.depth })
