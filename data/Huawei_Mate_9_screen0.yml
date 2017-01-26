@@ -1,0 +1,22 @@
+name: welcome_logo_1.JPG
+children:
+  - name: welcome_language_2.JPG
+    children:
+      - name: welcome_sim_3.JPG
+        children:
+          - name: welcome_terms_and_conditions_4.JPG
+            children:
+              - name: welcome_weather_5.JPG
+                children:
+                  - name: welcome_wifi_6.JPG
+                    children:
+                      - name: welcome_internet_7.JPG
+                        children:
+                          - name: welcome_google_8.JPG
+                            children:
+                              - name: welcome_data_9.JPG
+                                children:
+                                  - name: welcome_touch_10.JPG
+                                    children:
+                                      - name: welcome_welcome_11.JPG
+                                        children:

@@ -1,0 +1,20 @@
+name: welcome_logo_1.JPG
+children:
+  - name: welcome_logo_2.JPG
+    children:
+      - name: welcome_welcome_3.JPG
+        children:
+          - name: welcome_information_4.JPG
+            children:
+              - name: welcome_wifi_5.JPG
+                children:
+                  - name: welcome_name_6.JPG
+                    children:
+                      - name: welcome_phone_7.JPG
+                        children:
+                          - name: welcome_services_8.JPG
+                            children:
+                              - name: welcome_xperia_9.JPG
+                                children:
+                                  - name: welcome_finish_10.JPG
+                                    children:

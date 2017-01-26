@@ -1,0 +1,32 @@
+name: start_lockscreen_1.JPG
+children:
+  - name: start_home_2.JPG
+    children:
+      - name: dashbaord_notification_1.JPG
+        children:
+          - name: dashboard_notification_2.JPG
+            children:
+      - name: dashboard_search_1.JPG
+        children:
+      - name: dialer_call_1.JPG
+        children:
+          - name: dialer_call_2.JPG
+            children:
+              - name: dialer_call_3.JPG
+                children:
+                  - name: dialer_call_4.JPG
+                    children:
+                      - name: dialer_call_5.JPG
+                        children:
+      - name: dialer_message_1.JPG
+        children:
+          - name: dialer_message_2.JPG
+            children:
+      - name: settings_settings_1.JPG
+        children:
+          - name: settings_wifi_2.JPG
+            children:
+          - name: settings_language_2.JPG
+            children:
+              - name: settings_language_3.JPG
+                children:

@@ -45,6 +45,7 @@
     // update
     this.update(this.data)
 
+    console.log(this.data);
   }
 
   collapse (d) {
@@ -166,7 +167,7 @@
           if (vm.placeholder_img) {
             return '../images/placeholders/' + vm.options.name + '/phone1.jpg'
           } else {
-            return '../images/' + d.name
+            return '../images/' + vm.options.name + '/' + d.name
           }
         })
         .attr('class', 'screenshot')
