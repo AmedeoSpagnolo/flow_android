@@ -26,6 +26,38 @@ $( document ).ready(function() {
     'floors': 2,
   }
 
+  app.visualisations.samsung_edge_screen = {
+    'name': 'samsung_edge_screen',
+    'dataset': <%= data.samsung_edge_screen.to_json %>,
+    'floors': 20,
+  }
+  app.visualisations.Asus_Zenfone_3_Deluxe_screen = {
+    'name': 'Asus_Zenfone_3_Deluxe_screen',
+    'dataset': <%= data.Asus_Zenfone_3_Deluxe_screen.to_json %>,
+    'floors': 20,
+  }
+  app.visualisations.HTC_10_screen = {
+    'name': 'HTC_10_screen',
+    'dataset': <%= data.HTC_10_screen.to_json %>,
+    'floors': 20,
+  }
+  app.visualisations.Huawei_Mate_9_screen = {
+    'name': 'Huawei_Mate_9_screen',
+    'dataset': <%= data.Huawei_Mate_9_screen.to_json %>,
+    'floors': 20,
+  }
+  app.visualisations.LG_V20_screen = {
+    'name': 'LG_V20_screen',
+    'dataset': <%= data.LG_V20_screen.to_json %>,
+    'floors': 20,
+  }
+  app.visualisations.Sony_Xperia_XZ_screen = {
+    'name': 'Sony_Xperia_XZ_screen',
+    'dataset': <%= data.Sony_Xperia_XZ_screen.to_json %>,
+    'floors': 20,
+  }
+
+
   _.forEach(app.visualisations, function(value, key) {
     var name = value.name.replace(/_/g,"<br>")
     $(".visualisations").append('<div class="btn" id="' + value.name + '">' + name + '</div>')
