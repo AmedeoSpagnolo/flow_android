@@ -1,4 +1,5 @@
 var app = {}
+var utils = {}
 
 // old browsers
 app.isIE                = true
@@ -8,3 +9,18 @@ app.isIOS7              = true
 app.mq                  = null
 
 app.dataviz             = null
+
+
+utils.depthOf = function(object) {
+    var level = 1;
+    var key;
+    for(key in object) {
+        if (!object.hasOwnProperty(key)) continue;
+
+        if(typeof object[key] == 'object'){
+            var depth = utils.depthOf(object[key]) + 1;
+            level = Math.max(depth, level);
+        }
+    }
+    return level;
+}

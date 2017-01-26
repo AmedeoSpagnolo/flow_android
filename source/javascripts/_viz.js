@@ -25,49 +25,21 @@
     this.i = 0
 
     this.tree = d3.layout.tree()
-    .size([this.options.height, this.options.width]);
+        .size([this.options.height, this.options.width]);
 
     this.diagonal = d3.svg.diagonal()
-    .projection(function(d) { return [d.y, d.x]; });
+        .projection(function(d) { return [d.y, d.x]; });
+
   }
 
   init () {
 
-
-    // create svg tag
-    //
-    this.create_svg()
-
-    //
     // collapse all
-    //
     if (this.options.collapse_nodes) this.collapse(this.data)
 
-    //
     // update
-    //
     this.update(this.data)
 
-  }
-
-  create_svg () {
-    var obj = this.options
-    this.svg = d3.select(obj.target)
-      .style("overflow", obj.overflow)
-      .style("width", $(document).width())
-    .append("svg")
-      .attr("width", obj.width)
-      .attr("height", obj.height)
-      .attr("style", "border: solid 1px gray")
-      .attr("id","svg")
-    .append("g")
-      .attr("transform", "translate(" + obj.margin.left + "," + obj.margin.top + ")")
-
-    this.svg.append("g")
-      .attr("class","links")
-
-    this.svg.append("g")
-      .attr("class","nodes")
   }
 
   collapse (d) {
@@ -91,9 +63,53 @@
   update (source) {
     var vm = this
 
+    function max_depth () {
+      var md = 0
+      function _max (obj) {
+      console.log(obj.depth);
+      if (obj.depth > md) md = obj.depth
+      if (obj.children) {
+        obj.children.forEach(function (el){
+          _max(el)
+        })
+      }
+      //   if (ob.children) {
+      //     if (ob.children > md) {
+      //       // console.log(md, ob.children)
+      //       md = ob.children
+      //       iterate_md(ob.depth)
+      //     }
+      //     ob.children.forEach(function (el){
+      //       max_depth(el)
+      //     })
+      //   }
+      }
+      _max(source)
+      return md
+    }
+
+    function resize_width () {
+      // console.log(max_depth());
+      return max_depth() * vm.options.depth + vm.options.margin.left + vm.options.margin.right
+    }
+
+    function resize_height () {
+      return 600
+    }
+
     // Compute the new tree layout.
     var nodes = vm.tree.nodes(vm.data).reverse()
     var links = vm.tree.links(nodes)
+
+    // update svg
+    d3.select(vm.options.target)
+      .style("overflow", vm.options.overflow)
+      .style("width", $(document).width())
+
+    this.svg = d3.select("#svg")
+      .attr("width", resize_width())
+      .attr("height", resize_height())
+      .attr("style", "border: solid 1px gray")
 
     // Normalize for fixed-depth.
     nodes.forEach(function(d) { d.y = d.depth * vm.options.depth })
