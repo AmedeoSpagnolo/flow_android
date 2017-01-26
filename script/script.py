@@ -25,7 +25,7 @@ Sony_Xperia_XZ_screen = '920,x550+1890+740'
 
 
 def crop(name, phone, trim):
-    os.system('convert %s/script/photo/%s/%s -crop %s +repage -resize 400x %s/source/images/%s' % (pwd, phone, name, trim, pwd, name))
+    os.system('convert %s/script/photo/%s/%s -crop %s +repage -resize 400x %s/source/images/%s/%s' % (pwd, phone, name, trim, pwd, phone, name))
 
 def crop_folder(phone, trim):
     for file in glob.glob(str(pwd) + "/script/photo/" + str(phone) + "/*.JPG"):

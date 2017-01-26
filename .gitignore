@@ -2,3 +2,6 @@
 /untracked
 /script/photo/
 /script/zold/
+*.jpg
+*.jpeg
+*.JPG
