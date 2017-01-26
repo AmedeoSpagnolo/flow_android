@@ -11,22 +11,19 @@ $( document ).ready(function() {
   app.visualisations.samsung = {
     'name': 'samsung',
     'dataset': <%= data.samsung.to_json %>,
-    'label': false,
+    'floors': 11,
   }
 
   app.visualisations.samsung_onboarding = {
     'name': 'samsung_onboarding',
     'dataset': <%= data.samsung_onboarding.to_json %>,
-    'label': false,
+    'floors': 70,
   }
 
   app.visualisations.samsung_settings = {
     'name': 'samsung_settings',
     'dataset': <%= data.samsung_settings.to_json %>,
-    'margin': {top: 20, right: 600, bottom: 20, left: 300},
-    'depth': 140,
-    'image_width': 80,
-    'label': false,
+    'floors': 2,
   }
 
   _.forEach(app.visualisations, function(value, key) {
@@ -37,6 +34,6 @@ $( document ).ready(function() {
     })
   })
 
-  app.draw(app.visualisations.samsung)
+  app.draw(app.visualisations.samsung_settings)
 
 });

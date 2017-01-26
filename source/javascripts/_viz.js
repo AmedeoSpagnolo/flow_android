@@ -8,6 +8,7 @@
       'width': $(document).width(),
       'height': $(document).height(),
       'duration': 400,
+      'floors': 1,
       'overflow': 'auto',
       'depth': 240,
       'label': false,
@@ -25,8 +26,14 @@
     this.svg = null
     this.i = 0
 
-    this.tree = null
-    this.diagonal = null
+    this.options.height = this.options.floors * this.options.image_height
+
+    // tree init
+    this.tree = d3.layout.tree()
+        .size([this.options.height, this.options.width]);
+
+    this.diagonal = d3.svg.diagonal()
+        .projection(function(d) { return [d.y, d.x]; });
 
   }
 
@@ -75,9 +82,8 @@
       return md
     }
 
-    function max_height () {
+    function max_height (s) {
       var mh = []
-
       function _max (obj) {
         if (obj.children){
           var tmp = Object.keys(obj.children).length
@@ -92,24 +98,16 @@
       return _.max(mh)
     }
 
-    function resize_width () {
-      var t = (max_depth() + 2) * vm.options.depth + vm.options.margin.left + vm.options.margin.right
+    function resize_width (s) {
+      var t = (max_depth(s) + 2) * vm.options.depth + vm.options.margin.left + vm.options.margin.right
       return t
     }
 
-    function resize_height () {
-      console.log(max_height())
-      var t = (max_height() + 1) * vm.options.image_height + 50 + vm.options.margin.top + vm.options.margin.bottom
-      console.log(t);
-      return t
-    }
-
-    // tree init
-    this.tree = d3.layout.tree()
-        .size([vm.options.height, resize_width()]);
-
-    this.diagonal = d3.svg.diagonal()
-        .projection(function(d) { return [d.y, d.x]; });
+    // function resize_height (s) {
+    //   var t = (max_height(s) + 1) * vm.options.image_height + 50 + vm.options.margin.top + vm.options.margin.bottom
+    //   return 1000
+    // }
+    // console.log(max_height(source))
 
     // Compute the new tree layout.
     var nodes = vm.tree.nodes(vm.data).reverse()
@@ -125,7 +123,7 @@
 
     this.svg = d3.select("#svg")
       .attr("width", resize_width())
-      .attr("height", resize_height())
+      .attr("height", vm.options.height + vm.options.image_height*2)
       .attr("style", "border: solid 1px gray")
 
     // Normalize for fixed-depth.
