@@ -13,9 +13,10 @@
       'label': false,
       'image': true,
       'image_width': 180,
+      'image_height': 180 * 1.1,
       'image_shift': 0,
       'placeholder_img': true,
-      'collapse_nodes': false
+      'collapse_nodes': false,
     }, options)
 
     this.data = this.options.dataset,
@@ -24,11 +25,8 @@
     this.svg = null
     this.i = 0
 
-    this.tree = d3.layout.tree()
-        .size([this.options.height, this.options.width]);
-
-    this.diagonal = d3.svg.diagonal()
-        .projection(function(d) { return [d.y, d.x]; });
+    this.tree = null
+    this.diagonal = null
 
   }
 
@@ -77,14 +75,41 @@
       return md
     }
 
+    function max_height () {
+      var mh = []
+
+      function _max (obj) {
+        if (obj.children){
+          var tmp = Object.keys(obj.children).length
+          if (!mh[obj.depth]) mh[obj.depth] = 0
+          mh[obj.depth] += tmp
+          obj.children.forEach(function (el){
+            _max(el)
+          })
+        }
+      }
+      _max(source)
+      return _.max(mh)
+    }
+
     function resize_width () {
-      console.log(max_depth() + 1);
-      return (max_depth() + 2) * vm.options.depth + vm.options.margin.left + vm.options.margin.right
+      var t = (max_depth() + 2) * vm.options.depth + vm.options.margin.left + vm.options.margin.right
+      return t
     }
 
     function resize_height () {
-      return 600
+      console.log(max_height())
+      var t = (max_height() + 1) * vm.options.image_height + 50 + vm.options.margin.top + vm.options.margin.bottom
+      console.log(t);
+      return t
     }
+
+    // tree init
+    this.tree = d3.layout.tree()
+        .size([vm.options.height, resize_width()]);
+
+    this.diagonal = d3.svg.diagonal()
+        .projection(function(d) { return [d.y, d.x]; });
 
     // Compute the new tree layout.
     var nodes = vm.tree.nodes(vm.data).reverse()
@@ -95,10 +120,13 @@
       .style("overflow", vm.options.overflow)
       .style("width", $(document).width())
 
+    d3.select(".wrap")
+      .attr("transform", "translate(" + vm.options.margin.left + "," + vm.options.margin.top + ")")
+
     this.svg = d3.select("#svg")
       .attr("width", resize_width())
       .attr("height", resize_height())
-      // .attr("style", "border: solid 1px gray")
+      .attr("style", "border: solid 1px gray")
 
     // Normalize for fixed-depth.
     nodes.forEach(function(d) { d.y = d.depth * vm.options.depth })
