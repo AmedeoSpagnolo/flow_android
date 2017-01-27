@@ -1,34 +1,34 @@
-name: onboarding_welcomescreen_1.JPG
+name: asus_onboarding_welcomescreen_1.JPG
 children:
-  - name: onboarding_input_2.JPG
+  - name: asus_onboarding_input_2.JPG
     children:
-      - name: onboarding_internet_3.JPG
+      - name: asus_onboarding_internet_3.JPG
         children:
-          - name: onboarding_wifi_4.JPG
+          - name: asus_onboarding_wifi_4.JPG
             children:
-              - name: onboarding_terms_and_conditions_5.JPG
+              - name: asus_onboarding_terms_and_conditions_5.JPG
                 children:
-                  - name: onboarding_date_6.JPG
+                  - name: asus_onboarding_date_6.JPG
                     children:
-                      - name: onboarding_name_7.JPG
+                      - name: asus_onboarding_name_7.JPG
                         children:
-                          - name: onboarding_google_services_8.JPG
+                          - name: asus_onboarding_google_services_8.JPG
                             children:
-                              - name: onboarding_protect_9.JPG
+                              - name: asus_onboarding_protect_9.JPG
                                 children:
-                                  - name: onboarding_fingerprint_10.JPG
+                                  - name: asus_onboarding_fingerprint_10.JPG
                                     children:
-                                      - name: onboarding_screenlock_11.JPG
+                                      - name: asus_onboarding_screenlock_11.JPG
                                         children:
-                                          - name: onboarding_scanner_12.JPG
+                                          - name: asus_onboarding_scanner_12.JPG
                                             children:
-                                              - name: onboarding_placefinger_13.JPG
+                                              - name: asus_onboarding_placefinger_13.JPG
                                                 children:
-                                                  - name: onboarding_asus_14.JPG
+                                                  - name: asus_onboarding_asus_14.JPG
                                                     children:
-                                                      - name: onboarding_account_15.JPG
+                                                      - name: asus_onboarding_account_15.JPG
                                                         children:
-                                                          - name: onboarding_promotion_16.JPG
+                                                          - name: asus_onboarding_promotion_16.JPG
                                                             children:
-                                                              - name: onboarding_complete_17.JPG
+                                                              - name: asus_onboarding_complete_17.JPG
                                                                 children:

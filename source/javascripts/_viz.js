@@ -165,9 +165,9 @@
       nodeEnter.append('image')
         .attr('xlink:href', function(d) {
           if (vm.placeholder_img) {
-            return '../images/_placeholders/' + vm.options.name + '/phone1.jpg'
+            return '../images/placeholders/phone1.jpg'
           } else {
-            return '../images/' + vm.options.name + '/' + d.name
+            return '../images/' + d.name
           }
         })
         .attr('class', 'screenshot')

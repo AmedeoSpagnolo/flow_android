@@ -8,72 +8,17 @@ $( document ).ready(function() {
     app.dataviz.init()
   }
 
-  app.visualisations.samsung = {
-    'name': 'samsung',
-    'dataset': <%= data.samsung.to_json %>,
-    'floors': 11,
-  }
-
-  app.visualisations.samsung_onboarding = {
-    'name': 'samsung_onboarding',
-    'dataset': <%= data.samsung_onboarding.to_json %>,
-    'floors': 70,
-  }
-
-  app.visualisations.samsung_settings = {
-    'name': 'samsung_settings',
-    'dataset': <%= data.samsung_settings.to_json %>,
-    'floors': 2,
-  }
 
   app.visualisations.Asus_Zenfone_3_Deluxe_screen0 = {
     'name': 'Asus_Zenfone_3_Deluxe_screen0',
+    'prefix': 'asus',
     'dataset': <%= data.Asus_Zenfone_3_Deluxe_screen0.to_json %>,
-    'floors': 2,
+    'floors': 1,
   }
   app.visualisations.Asus_Zenfone_3_Deluxe_screen1 = {
     'name': 'Asus_Zenfone_3_Deluxe_screen1',
+    'prefix': 'asus',
     'dataset': <%= data.Asus_Zenfone_3_Deluxe_screen1.to_json %>,
-    'floors': 20,
-  }
-  app.visualisations.HTC_10_screen0 = {
-    'name': 'HTC_10_screen0',
-    'dataset': <%= data.HTC_10_screen0.to_json %>,
-    'floors': 2,
-  }
-  app.visualisations.HTC_10_screen1 = {
-    'name': 'HTC_10_screen1',
-    'dataset': <%= data.HTC_10_screen1.to_json %>,
-    'floors': 20,
-  }
-  app.visualisations.Huawei_Mate_9_screen0 = {
-    'name': 'Huawei_Mate_9_screen0',
-    'dataset': <%= data.Huawei_Mate_9_screen0.to_json %>,
-    'floors': 2,
-  }
-  app.visualisations.Huawei_Mate_9_screen1 = {
-    'name': 'Huawei_Mate_9_screen1',
-    'dataset': <%= data.Huawei_Mate_9_screen1.to_json %>,
-    'floors': 20,
-  }
-  app.visualisations.LG_V20_screen0 = {
-    'name': 'LG_V20_screen0',
-    'dataset': <%= data.LG_V20_screen0.to_json %>,
-    'floors': 2,
-  }
-  app.visualisations.LG_V20_screen1 = {
-    'name': 'LG_V20_screen1',
-    'dataset': <%= data.LG_V20_screen1.to_json %>,
-    'floors': 20,
-  }
-  app.visualisations.Sony_Xperia_XZ_screen0 = {
-    'name': 'Sony_Xperia_XZ_screen0',
-    'dataset': <%= data.Sony_Xperia_XZ_screen0.to_json %>,
-    'floors': 2,
-  }
-  app.visualisations.Sony_Xperia_XZ_screen1 = {
-    'name': 'Sony_Xperia_XZ_screen1',
-    'dataset': <%= data.Sony_Xperia_XZ_screen1.to_json %>,
     'floors': 18,
   }
 
@@ -86,6 +31,6 @@ $( document ).ready(function() {
     })
   })
 
-  app.draw(app.visualisations.samsung)
+  app.draw(app.visualisations.Asus_Zenfone_3_Deluxe_screen0)
 
 });
