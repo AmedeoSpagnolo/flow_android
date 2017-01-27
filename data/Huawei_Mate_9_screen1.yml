@@ -1,0 +1,32 @@
+name: huawei_start_lockscreen_1.JPG
+children:
+  - name: huawei_start_home_2.JPG
+    children:
+      - name: huawei_dashboard_notification_1.JPG
+        children:
+      - name: huawei_dashboard_weather_1.JPG
+        children:
+      - name: huawei_dialer_call_1.JPG
+        children:
+          - name: huawei_dialer_call_2.JPG
+            children:
+              - name: huawei_dialer_call_3.JPG
+                children:
+                  - name: huawei_dialer_call_4.JPG
+                    children:
+      - name: huawei_dialer_message_1.JPG
+        children:
+          - name: huawei_dialer_message_2.JPG
+            children:
+              - name: huawei_dialer_message_3.JPG
+                children:
+      - name: huawei_settings_settings_1.JPG
+        children:
+          - name: huawei_settings_display_2.JPG
+            children:
+          - name: huawei_settings_data_2.JPG
+            children:
+          - name: huawei_settings_wifi_2.JPG
+            children:
+              - name: huawei_settings_wifi_3.JPG
+                children:

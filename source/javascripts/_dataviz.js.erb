@@ -21,6 +21,74 @@ $( document ).ready(function() {
     'dataset': <%= data.Asus_Zenfone_3_Deluxe_screen1.to_json %>,
     'floors': 18,
   }
+  app.visualisations.HTC_10_screen0 = {
+    'name': 'HTC_10_screen0',
+    'prefix': 'htc',
+    'dataset': <%= data.HTC_10_screen0.to_json %>,
+    'floors': 1,
+  }
+  app.visualisations.HTC_10_screen1 = {
+    'name': 'HTC_10_screen1',
+    'prefix': 'htc',
+    'dataset': <%= data.HTC_10_screen1.to_json %>,
+    'floors': 20,
+  }
+  app.visualisations.Huawei_Mate_9_screen0 = {
+    'name': 'Huawei_Mate_9_screen0',
+    'prefix': 'huawei',
+    'dataset': <%= data.Huawei_Mate_9_screen0.to_json %>,
+    'floors': 2,
+  }
+  app.visualisations.Huawei_Mate_9_screen1 = {
+    'name': 'Huawei_Mate_9_screen1',
+    'prefix': 'huawei',
+    'dataset': <%= data.Huawei_Mate_9_screen1.to_json %>,
+    'floors': 20,
+  }
+  app.visualisations.LG_V20_screen0 = {
+    'name': 'LG_V20_screen0',
+    'prefix': 'lg',
+    'dataset': <%= data.LG_V20_screen0.to_json %>,
+    'floors': 2,
+  }
+  app.visualisations.LG_V20_screen1 = {
+    'name': 'LG_V20_screen1',
+    'prefix': 'lg',
+    'dataset': <%= data.LG_V20_screen1.to_json %>,
+    'floors': 20,
+  }
+  app.visualisations.Sony_Xperia_XZ_screen0 = {
+    'name': 'Sony_Xperia_XZ_screen0',
+    'prefix': 'lg',
+    'dataset': <%= data.Sony_Xperia_XZ_screen0.to_json %>,
+    'floors': 2,
+  }
+  app.visualisations.Sony_Xperia_XZ_screen1 = {
+    'name': 'Sony_Xperia_XZ_screen1',
+    'prefix': 'sony',
+    'dataset': <%= data.Sony_Xperia_XZ_screen1.to_json %>,
+    'floors': 18,
+  }
+  app.visualisations.samsung = {
+    'name': 'samsung',
+    'prefix': 'samsung',
+    'dataset': <%= data.samsung.to_json %>,
+    'floors': 11,
+  }
+  app.visualisations.samsung_onboarding = {
+    'name': 'samsung_onboarding',
+    'prefix': 'samsung',
+    'dataset': <%= data.samsung_onboarding.to_json %>,
+    'floors': 70,
+  }
+  app.visualisations.samsung_settings = {
+    'name': 'samsung_settings',
+    'prefix': 'samsung',
+    'dataset': <%= data.samsung_settings.to_json %>,
+    'floors': 2,
+  }
+
+
 
 
   _.forEach(app.visualisations, function(value, key) {
@@ -31,6 +99,6 @@ $( document ).ready(function() {
     })
   })
 
-  app.draw(app.visualisations.Asus_Zenfone_3_Deluxe_screen0)
+  app.draw(app.visualisations.HTC_10_screen0)
 
 });

@@ -1,0 +1,30 @@
+name: htc_start_home.JPG
+children:
+  - name: htc_dashboard_apps_1.JPG
+    children:
+      - name: htc_dashboard_blinkfeed_1.JPG
+        children:
+      - name: htc_dashboard_control_1.JPG
+        children:
+      - name: htc_dashboard_search_1.JPG
+        children:
+  - name: htc_dialer_call_1.JPG
+    children:
+      - name: htc_dialer_call_2.JPG
+        children:
+          - name: htc_dialer_call_3.JPG
+            children:
+              - name: htc_dialer_call_4.JPG
+                children:
+  - name: htc_dialer_message_1.JPG
+    children:
+      - name: htc_dialer_message_2.JPG
+        children:
+  - name: htc_settings_settings_1.JPG
+    children:
+      - name: htc_settings_wifi_2.JPG
+        children:
+      - name: htc_settings_language_2.JPG
+        children:
+          - name: htc_settings_language_3.JPG
+            children:

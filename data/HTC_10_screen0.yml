@@ -1,0 +1,14 @@
+name: htc_welcome_welcome_1.JPG
+children:
+  - name: htc_welcome_terms_of_use_2.JPG
+    children:
+      - name: htc_welcome_internet_3.JPG
+        children:
+          - name: htc_welcome_google_services_4.JPG
+            children:
+              - name: htc_welcome_date_5.JPG
+                children:
+                  - name: htc_welcome_protect_6.JPG
+                    children:
+                      - name: htc_welcome_personalize_7.JPG
+                        children:
